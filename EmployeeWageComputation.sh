@@ -4,24 +4,33 @@ echo "Welcome to Employee Wage Computation Program"
 
 isPresent=1;
 WageperHour=20;
-FullDayHour=8;
-DailyPayment=0;
-ParttimeEmployee=8;
-checkRandom=$((RANDOM%2))
-if [ $FullDayHour -eq $checkRandom ]
-then
-     echo "Employee is Present"
-     DailyPayment=$(($WageperHour*$FullDayHour))
-     echo "daily Payment is: " $DailyPayment
-     EmployeeHours=8;
-elif [ $ParttimeEmployee -eq $checkRandom ] 
-then
-     echo "Employee is Absent"
-     echo "daily Payment is: " $DailyPayment
-     EmployeeHours=4;
-else
-     EmployeeHours=0;
-fi
+FullDay=2;
+MaximumHoursInMonth=4;
+NumberWorkingDays=20;
 
-salary=$(($EmployeeHours*$WageperHour));
+TotalEmployeeHour=0;
+TotalWorkingDays=0;
 
+function getWorkingHours() {
+  case $1 in 
+         $FullDay)
+              workHours=8
+              ;;
+        $isPresent) 
+              workHours=4
+              ;;
+         *)
+              workHours=0
+              ;;
+  esac
+  echo $workHours
+}
+
+while [[ $TotalWorkHours -lt $MaximumHoursInMonth &&
+         $TotalWorkingDays -lt $NumberWorkingDays ]]
+do 
+   ((TotalWorkingDays++))
+   workHours="$( getWorkingHours $((RANDOM%3)) )"
+   TotalWorkHours=$(($TotalWorkHours*$workHours))
+   TotalSalary=$(($TotalWorkHours*$WageperHour));
+done
